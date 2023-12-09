@@ -7,6 +7,10 @@ class Styles {
   static Color textColor = Colors.black;
   static Color cardColor = const Color(0xFF415957).withOpacity(0.3);
   static Color smallCardColor = const Color(0xFFAFA767);
+  static Color calculationBgColor = const Color(0xFFEEEEEE);
+  static Color borderSideColor = const Color(0xFF336699);
+  static Color buttonColor = const Color(0xFF4C7B25);
+
   static TextStyle textStyle =
       TextStyle(fontSize: 18, color: textColor, fontWeight: FontWeight.w500);
   static TextStyle headLineStyle1 =
@@ -14,7 +18,7 @@ class Styles {
   static TextStyle headLineStyle2 =
       TextStyle(fontSize: 21, color: textColor, fontWeight: FontWeight.bold);
   static TextStyle headLineStyle3 =
-      TextStyle(fontSize: 22, color: textColor, fontWeight: FontWeight.w500);
+      TextStyle(fontSize: 16, color: textColor, fontWeight: FontWeight.w500);
   static TextStyle headLineStyle4 =
       TextStyle(fontSize: 17, color: textColor, fontWeight: FontWeight.w500);
   static TextStyle headLineStyle5 =

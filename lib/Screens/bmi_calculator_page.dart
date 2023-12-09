@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:kingcalculator/Utils/app_style.dart';
 
+enum GanderGroup { male, female }
+
 class BMICalculatorScreen extends StatefulWidget {
   const BMICalculatorScreen({Key? key}) : super(key: key);
 
@@ -9,6 +11,7 @@ class BMICalculatorScreen extends StatefulWidget {
 }
 
 class _BMICalculatorScreenState extends State<BMICalculatorScreen> {
+  final GanderGroup _value = GanderGroup.male;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,6 +25,224 @@ class _BMICalculatorScreenState extends State<BMICalculatorScreen> {
                   "Bmi Calculator",
                   style: Styles.headLineStyle1,
                 ),
+              ),
+              SizedBox(
+                width: double.infinity,
+                child: Container(
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: Styles.calculationBgColor,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Column(
+                    children: [
+                      // Age Section
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10),
+                        child: Row(
+                          children: [
+                            Text(
+                              "Age ",
+                              style: Styles.headLineStyle2,
+                            ),
+                            Expanded(
+                                child: TextField(
+                              decoration: InputDecoration(
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(16),
+                                  borderSide: const BorderSide(
+                                      color: Colors.black, width: 3),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(16),
+                                  borderSide: BorderSide(
+                                      color: Styles.borderSideColor, width: 5),
+                                ),
+                              ),
+                            )),
+                            Text(
+                              "  age: 2 - 120",
+                              style: Styles.headLineStyle2,
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      // Gender Section
+                      Row(
+                        children: [
+                          // Text(
+                          //   "Gender",
+                          //   style: Styles.headLineStyle2,
+                          // ),
+                          Expanded(
+                            child: RadioListTile(
+                                value: GanderGroup.male,
+                                title: Text(
+                                  "Male",
+                                  style: Styles.headLineStyle3,
+                                ),
+                                groupValue: _value,
+                                onChanged: (_) {}),
+                          ),
+                          Expanded(
+                            child: RadioListTile(
+                                value: GanderGroup.male,
+                                title: Text(
+                                  "Female",
+                                  style: Styles.headLineStyle3,
+                                ),
+                                groupValue: _value,
+                                onChanged: (_) {}),
+                          ),
+                        ],
+                      ),
+                      // Height Section
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10),
+                        child: Row(
+                          children: [
+                            Text(
+                              "Height ",
+                              style: Styles.headLineStyle2,
+                            ),
+                            Expanded(
+                                child: TextField(
+                              decoration: InputDecoration(
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(16),
+                                  borderSide: const BorderSide(
+                                      color: Colors.black, width: 3),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(16),
+                                  borderSide: BorderSide(
+                                      color: Styles.borderSideColor, width: 5),
+                                ),
+                              ),
+                            )),
+                            const SizedBox(
+                              width: 5,
+                            ),
+                            Expanded(
+                                child: TextField(
+                              decoration: InputDecoration(
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(16),
+                                  borderSide: const BorderSide(
+                                      color: Colors.black, width: 3),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(16),
+                                  borderSide: BorderSide(
+                                      color: Styles.borderSideColor, width: 5),
+                                ),
+                              ),
+                            )),
+                          ],
+                        ),
+                      ),
+                      // Weight Section
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10),
+                        child: Row(
+                          children: [
+                            Text(
+                              "Weight ",
+                              style: Styles.headLineStyle2,
+                            ),
+                            Expanded(
+                                child: TextField(
+                              decoration: InputDecoration(
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(16),
+                                  borderSide: const BorderSide(
+                                      color: Colors.black, width: 3),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(16),
+                                  borderSide: BorderSide(
+                                      color: Styles.borderSideColor, width: 5),
+                                ),
+                              ),
+                            )),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            height: 60,
+                            width: 180,
+                            decoration: BoxDecoration(
+                              color: Styles.buttonColor,
+                            ),
+                            child: TextButton(
+                              onPressed: () {},
+                              child: const Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "Calculate",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Icon(
+                                    Icons.play_circle,
+                                    color: Colors.white,
+                                    size: 35,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+
+
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Container(
+                            height: 60,
+                            width: 100,
+                            decoration: const BoxDecoration(
+                              color:Colors.grey,
+                            ),
+                            child: TextButton(
+                              onPressed: () {},
+                              child: const Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "Clear",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 20,
               ),
               SizedBox(
                 height: 40,
