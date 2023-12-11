@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:kingcalculator/Utils/app_style.dart';
 
+import '../Calculation/bmi_calculation.dart';
+
 enum GanderGroup { male, female }
 
 class BMICalculatorScreen extends StatefulWidget {
@@ -12,6 +14,15 @@ class BMICalculatorScreen extends StatefulWidget {
 
 class _BMICalculatorScreenState extends State<BMICalculatorScreen> {
   final GanderGroup _value = GanderGroup.male;
+  final GanderGroup _value2 = GanderGroup.female;
+
+  String result = '';
+
+  TextEditingController ageController = TextEditingController();
+  TextEditingController heightController1 = TextEditingController();
+  TextEditingController heightController2 = TextEditingController();
+  TextEditingController weightController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,6 +58,7 @@ class _BMICalculatorScreenState extends State<BMICalculatorScreen> {
                             ),
                             Expanded(
                                 child: TextField(
+                              controller: ageController,
                               decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(16),
@@ -89,12 +101,12 @@ class _BMICalculatorScreenState extends State<BMICalculatorScreen> {
                           ),
                           Expanded(
                             child: RadioListTile(
-                                value: GanderGroup.male,
+                                value: GanderGroup.female,
                                 title: Text(
                                   "Female",
                                   style: Styles.headLineStyle3,
                                 ),
-                                groupValue: _value,
+                                groupValue: _value2,
                                 onChanged: (_) {}),
                           ),
                         ],
@@ -110,6 +122,7 @@ class _BMICalculatorScreenState extends State<BMICalculatorScreen> {
                             ),
                             Expanded(
                                 child: TextField(
+                              controller: heightController1,
                               decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(16),
@@ -128,6 +141,7 @@ class _BMICalculatorScreenState extends State<BMICalculatorScreen> {
                             ),
                             Expanded(
                                 child: TextField(
+                              controller: heightController2,
                               decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(16),
@@ -155,6 +169,7 @@ class _BMICalculatorScreenState extends State<BMICalculatorScreen> {
                             ),
                             Expanded(
                                 child: TextField(
+                              controller: weightController,
                               decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(16),
@@ -184,7 +199,18 @@ class _BMICalculatorScreenState extends State<BMICalculatorScreen> {
                               color: Styles.buttonColor,
                             ),
                             child: TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                setState(() {
+                                  BmiCalculation cal = BmiCalculation(
+                                    height1: int.parse(heightController1.text),
+                                    height2: int.parse(heightController2.text),
+                                    weight: double.parse(weightController.text),
+                                  );
+                                    cal.calculateBMI();
+                                    result = cal.getResult();
+                                   print(result);
+                                });
+                              },
                               child: const Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -207,8 +233,6 @@ class _BMICalculatorScreenState extends State<BMICalculatorScreen> {
                               ),
                             ),
                           ),
-
-
                           const SizedBox(
                             width: 10,
                           ),
@@ -216,10 +240,17 @@ class _BMICalculatorScreenState extends State<BMICalculatorScreen> {
                             height: 60,
                             width: 100,
                             decoration: const BoxDecoration(
-                              color:Colors.grey,
+                              color: Colors.grey,
                             ),
                             child: TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                setState(() {
+                                  heightController1.clear();
+                                  heightController2.clear();
+                                  weightController.clear();
+                                  ageController.clear();
+                                });
+                              },
                               child: const Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -230,12 +261,28 @@ class _BMICalculatorScreenState extends State<BMICalculatorScreen> {
                                         fontSize: 22,
                                         fontWeight: FontWeight.bold),
                                   ),
-
                                 ],
                               ),
                             ),
                           ),
                         ],
+                      ),
+                     const SizedBox(height: 10,),
+                      Container(
+                        height:60 ,
+                        width: double.infinity ,
+                        decoration: BoxDecoration(
+                          color: Styles.buttonColor,
+                        ),
+                        child: Center(
+                          child: Text(
+                            "Result : $result",
+                            style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 22,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
                       )
                     ],
                   ),
